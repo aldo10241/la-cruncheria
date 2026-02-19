@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Crunchería | Botanas Saludables</title>
     <style>
-        /* Paleta de colores inspirada en tus empaques */
+        /* --- VARIABLES Y COLORES --- */
         :root {
             --bg-color: #fdfbf7;
             --kraft-base: #d4b58e;
@@ -14,8 +14,9 @@
             --betabel-maroon: #8b2b56;
             --amaranto-red: #a63535;
             --amaranto-green: #76b13f;
-            --jicama-blue: #aee0e5;
+            --jicama-blue: #3b9ca6;
             --whatsapp-green: #25D366;
+            --section-gray: #f4f4f4;
         }
 
         * {
@@ -25,40 +26,52 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth; /* Desplazamiento suave al dar clic en menú */
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden; /* Evita scroll horizontal indeseado */
         }
 
-        /* Navegación */
+        /* --- CLASES DE ANIMACIÓN --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVEGACIÓN --- */
         header {
             background-color: #fff;
-            padding: 20px 5%;
+            padding: 15px 5%;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--text-dark);
-            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
+            text-decoration: none;
         }
 
-        .logo-icon {
-            background-color: var(--kraft-base);
-            padding: 5px 10px;
-            border-radius: 8px;
-            color: white;
+        /* Ajuste para que la imagen del logo se vea bien */
+        .logo img {
+            height: 50px; /* Ajusta este valor según el tamaño de tu logo */
+            width: auto;
         }
 
         nav a {
@@ -67,85 +80,150 @@
             color: var(--text-dark);
             font-weight: 500;
             transition: color 0.3s;
+            font-size: 1rem;
         }
 
         nav a:hover {
             color: var(--camote-orange);
         }
 
-        /* Sección Hero */
+        /* --- SECCIÓN HERO (PRINCIPAL) --- */
         .hero {
+            position: relative;
             text-align: center;
-            padding: 80px 5%;
-            background: linear-gradient(rgba(253, 251, 247, 0.9), rgba(212, 181, 142, 0.4));
+            padding: 120px 5%;
+            /* IMAGEN DE FONDO: Cambia 'assets/tu-fondo-hero.jpg' por tu imagen real */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Efecto Parallax opcional */
+            color: white; /* Texto blanco para contraste */
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
-            color: var(--text-dark);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            color: #555;
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            font-weight: 400;
         }
 
         .cta-button {
             display: inline-block;
-            padding: 15px 30px;
+            padding: 15px 35px;
             background-color: var(--camote-orange);
             color: white;
             text-decoration: none;
             border-radius: 30px;
             font-weight: bold;
             font-size: 1.1rem;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            border: 2px solid transparent;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(214, 135, 68, 0.4);
+            background-color: #bf7639;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* Sección Nosotros */
+        /* --- SECCIÓN NOSOTROS --- */
         .nosotros {
-            padding: 60px 5%;
+            padding: 80px 5%;
             max-width: 900px;
             margin: 0 auto;
             text-align: center;
         }
 
         .nosotros h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
             color: var(--amaranto-green);
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Pequeña línea decorativa debajo del título */
+        .nosotros h2::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 3px;
+            background-color: var(--kraft-base);
+            margin: 10px auto 0;
+            border-radius: 2px;
         }
 
         .nosotros p {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             text-align: justify;
+            color: #555;
         }
 
-        /* Sección Productos */
+        /* --- SECCIÓN MISIÓN (NUEVA) --- */
+        .mision-section {
+            background-color: var(--section-gray);
+            padding: 80px 5%;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .mision-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .mision-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            color: var(--betabel-maroon);
+        }
+
+        .mision-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--camote-orange);
+        }
+
+        .mision-box p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        /* --- SECCIÓN PRODUCTOS --- */
         .productos-section {
-            padding: 60px 5%;
+            padding: 80px 5%;
             background-color: #fff;
         }
 
         .productos-section h2 {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+            color: var(--text-dark);
         }
 
+        /* GRID FLEXIBLE CENTRADO */
         .productos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            flex-wrap: wrap; /* Permite que bajen de línea */
+            justify-content: center; /* Centra los elementos (soluciona el 5to elemento) */
             gap: 30px;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
@@ -157,76 +235,104 @@
             transition: transform 0.3s;
             text-align: center;
             border: 2px solid var(--kraft-base);
+            
+            /* Ancho fijo para las tarjetas para que se alineen bien */
+            flex: 0 1 300px; /* Base de 300px, puede encogerse pero no crecer más de lo necesario */
+            min-width: 280px;
         }
 
         .producto-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
         .producto-img-placeholder {
             width: 100%;
             height: 250px;
             background-color: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            /* Aquí irán tus imágenes */
+            overflow: hidden;
         }
         
         .producto-img-placeholder img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        /* Efecto zoom suave en la imagen al pasar el mouse */
+        .producto-card:hover .producto-img-placeholder img {
+            transform: scale(1.05);
         }
 
         .producto-info {
-            padding: 20px;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: calc(100% - 250px);
         }
 
         .producto-info h3 {
             margin-bottom: 10px;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
         }
 
-        /* Colores dinámicos para los títulos de cada producto */
+        .producto-info p {
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            flex-grow: 1; /* Empuja el botón hacia abajo */
+        }
+
+        /* Colores dinámicos */
         .color-camote { color: var(--camote-orange); }
         .color-betabel { color: var(--betabel-maroon); }
         .color-amaranto-rojo { color: var(--amaranto-red); }
         .color-amaranto-verde { color: var(--amaranto-green); }
-        .color-jicama { color: #3b9ca6; /* Un tono más oscuro para lectura */ }
+        .color-jicama { color: var(--jicama-blue); }
 
         .btn-comprar {
             display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
+            padding: 10px 25px;
             background-color: var(--whatsapp-green);
             color: white;
             text-decoration: none;
-            border-radius: 20px;
+            border-radius: 25px;
             font-weight: bold;
-            transition: opacity 0.3s;
+            transition: background-color 0.3s;
+            align-self: center;
         }
 
         .btn-comprar:hover {
-            opacity: 0.8;
+            background-color: #1ebe57;
         }
 
-        /* Footer */
+        /* --- FOOTER --- */
         footer {
             background-color: var(--text-dark);
-            color: white;
+            color: #ccc;
             text-align: center;
-            padding: 30px 5%;
-            margin-top: 40px;
+            padding: 40px 5%;
+            margin-top: 0;
+        }
+        
+        footer p {
+            margin: 5px 0;
         }
 
-        /* Responsive */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             nav {
-                display: none; /* Se puede hacer un menú hamburguesa después */
+                display: none; /* Idealmente reemplazar con menú móvil */
             }
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
+            }
+            .hero {
+                padding: 80px 5%;
+            }
+            .mision-box {
+                padding: 20px;
             }
         }
     </style>
@@ -235,33 +341,42 @@
 
     <header>
         <a href="#" class="logo">
-            <span class="logo-icon">LC</span> La Crunchería
+            <img src="assets/logo.png" alt="La Crunchería Logo">
         </a>
         <nav>
             <a href="#inicio">Inicio</a>
-            <a href="#nosotros">Nuestra Historia</a>
-            <a href="#productos">Productos</a>
+            <a href="#nosotros">Historia</a>
+            <a href="#mision">Misión</a> <a href="#productos">Productos</a>
         </nav>
     </header>
 
-    <section class="hero" id="inicio">
-        <h1>Botanas Saludables y Deliciosas</h1>
+    <section class="hero reveal" id="inicio">
+        <h1>Botanas Crujientes, Deliciosas y Saludables</h1>
         <p>Snacks hechos con vegetales naturales. El equilibrio perfecto entre cuidarte y disfrutar de un gran sabor.</p>
         <a href="#productos" class="cta-button">Ver Productos</a>
     </section>
 
-    <section class="nosotros" id="nosotros">
+    <section class="nosotros reveal" id="nosotros">
         <h2>Nuestra Historia</h2>
         <p>Somos una comercializadora mexicana de botanas saludables. Nuestro enfoque principal creció cuando se quitó por completo la comida chatarra en cooperativas escolares. Desde ahí nació nuestra idea de llegar a las escuelas con el fin de que niños, jóvenes, personas que se preocupan por tener una alimentación balanceada y cualquiera que quiera probar nuestros productos, disfruten de snacks saludables hechos con vegetales naturales, garantizando siempre un acceso directo y de calidad.</p>
     </section>
 
-    <section class="productos-section" id="productos">
+    <section class="mision-section reveal" id="mision">
+        <div class="mision-container">
+            <h2>Nuestra Misión y Objetivo</h2>
+            <div class="mision-box">
+                <p>"Nuestra misión y nuestro objetivo es que, además de ser una comercializadora mexicana líder que facilite el acceso a botanas nutritivas y naturales, también optimicemos la cadena logística para llegar al consumidor final, bajo un modelo de comercio justo que impulse el bienestar de nuestra comunidad y el desarrollo integral de los productores locales."</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="productos-section reveal" id="productos">
         <h2>Nuestros Sabores</h2>
         <div class="productos-grid">
             
             <div class="producto-card">
                 <div class="producto-img-placeholder">
-                    <img src="tu-imagen-camote.jpg" alt="Chips de Camote">
+                    <img src="assets/chips-camote.png" alt="Chips de Camote">
                 </div>
                 <div class="producto-info">
                     <h3 class="color-camote">Chips de Camote</h3>
@@ -272,7 +387,7 @@
 
             <div class="producto-card">
                 <div class="producto-img-placeholder">
-                    <img src="tu-imagen-betabel.jpg" alt="Chips de Betabel">
+                    <img src="assets/chips-betabel.png" alt="Chips de Betabel">
                 </div>
                 <div class="producto-info">
                     <h3 class="color-betabel">Chips de Betabel</h3>
@@ -283,7 +398,7 @@
 
             <div class="producto-card">
                 <div class="producto-img-placeholder">
-                    <img src="tu-imagen-amaranto-rojo.jpg" alt="Churritos de Amaranto Enchilados">
+                    <img src="assets/churritos-amaranto-enchilados.png" alt="Churritos de Amaranto Enchilados">
                 </div>
                 <div class="producto-info">
                     <h3 class="color-amaranto-rojo">Churritos de Amaranto</h3>
@@ -294,7 +409,7 @@
 
             <div class="producto-card">
                 <div class="producto-img-placeholder">
-                    <img src="tu-imagen-amaranto-verde.jpg" alt="Churritos de Amaranto">
+                    <img src="assets/churritos-amaranto.png" alt="Churritos de Amaranto">
                 </div>
                 <div class="producto-info">
                     <h3 class="color-amaranto-verde">Churritos Naturales</h3>
@@ -305,7 +420,7 @@
 
             <div class="producto-card">
                 <div class="producto-img-placeholder">
-                    <img src="tu-imagen-jicama.jpg" alt="Chips de Jícama">
+                    <img src="assets/chips-jicama.jpg" alt="Chips de Jícama">
                 </div>
                 <div class="producto-info">
                     <h3 class="color-jicama">Chips de Jícama</h3>
@@ -321,6 +436,32 @@
         <p>&copy; 2026 La Crunchería. Todos los derechos reservados.</p>
         <p>Comercializadora mexicana de botanas saludables.</p>
     </footer>
+
+    <script>
+        // Esta función detecta cuando un elemento entra en la pantalla
+        window.addEventListener('scroll', reveal);
+
+        function reveal(){
+            var reveals = document.querySelectorAll('.reveal');
+
+            for(var i = 0; i < reveals.length; i++){
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 150;
+
+                if(revealtop < windowheight - revealpoint){
+                    reveals[i].classList.add('active');
+                }
+                // Opcional: Si quieres que desaparezcan al subir, descomenta el else
+                // else {
+                //    reveals[i].classList.remove('active');
+                // }
+            }
+        }
+        
+        // Ejecutar una vez al cargar para mostrar el hero
+        reveal();
+    </script>
 
 </body>
 </html>
