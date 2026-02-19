@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Crunchería | Botanas Saludables</title>
+    <style>
+        /* Paleta de colores inspirada en tus empaques */
+        :root {
+            --bg-color: #fdfbf7;
+            --kraft-base: #d4b58e;
+            --text-dark: #333333;
+            --camote-orange: #d68744;
+            --betabel-maroon: #8b2b56;
+            --amaranto-red: #a63535;
+            --amaranto-green: #76b13f;
+            --jicama-blue: #aee0e5;
+            --whatsapp-green: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navegación */
+        header {
+            background-color: #fff;
+            padding: 20px 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            background-color: var(--kraft-base);
+            padding: 5px 10px;
+            border-radius: 8px;
+            color: white;
+        }
+
+        nav a {
+            margin-left: 20px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--camote-orange);
+        }
+
+        /* Sección Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 5%;
+            background: linear-gradient(rgba(253, 251, 247, 0.9), rgba(212, 181, 142, 0.4));
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #555;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--camote-orange);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(214, 135, 68, 0.4);
+        }
+
+        /* Sección Nosotros */
+        .nosotros {
+            padding: 60px 5%;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .nosotros h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--amaranto-green);
+        }
+
+        .nosotros p {
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        /* Sección Productos */
+        .productos-section {
+            padding: 60px 5%;
+            background-color: #fff;
+        }
+
+        .productos-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .producto-card {
+            background: var(--bg-color);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            text-align: center;
+            border: 2px solid var(--kraft-base);
+        }
+
+        .producto-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .producto-img-placeholder {
+            width: 100%;
+            height: 250px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Aquí irán tus imágenes */
+        }
+        
+        .producto-img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .producto-info {
+            padding: 20px;
+        }
+
+        .producto-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Colores dinámicos para los títulos de cada producto */
+        .color-camote { color: var(--camote-orange); }
+        .color-betabel { color: var(--betabel-maroon); }
+        .color-amaranto-rojo { color: var(--amaranto-red); }
+        .color-amaranto-verde { color: var(--amaranto-green); }
+        .color-jicama { color: #3b9ca6; /* Un tono más oscuro para lectura */ }
+
+        .btn-comprar {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: var(--whatsapp-green);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        .btn-comprar:hover {
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 30px 5%;
+            margin-top: 40px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                display: none; /* Se puede hacer un menú hamburguesa después */
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">
+            <span class="logo-icon">LC</span> La Crunchería
+        </a>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#nosotros">Nuestra Historia</a>
+            <a href="#productos">Productos</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <h1>Botanas Saludables y Deliciosas</h1>
+        <p>Snacks hechos con vegetales naturales. El equilibrio perfecto entre cuidarte y disfrutar de un gran sabor.</p>
+        <a href="#productos" class="cta-button">Ver Productos</a>
+    </section>
+
+    <section class="nosotros" id="nosotros">
+        <h2>Nuestra Historia</h2>
+        <p>Somos una comercializadora mexicana de botanas saludables. Nuestro enfoque principal creció cuando se quitó por completo la comida chatarra en cooperativas escolares. Desde ahí nació nuestra idea de llegar a las escuelas con el fin de que niños, jóvenes, personas que se preocupan por tener una alimentación balanceada y cualquiera que quiera probar nuestros productos, disfruten de snacks saludables hechos con vegetales naturales, garantizando siempre un acceso directo y de calidad.</p>
+    </section>
+
+    <section class="productos-section" id="productos">
+        <h2>Nuestros Sabores</h2>
+        <div class="productos-grid">
+            
+            <div class="producto-card">
+                <div class="producto-img-placeholder">
+                    <img src="tu-imagen-camote.jpg" alt="Chips de Camote">
+                </div>
+                <div class="producto-info">
+                    <h3 class="color-camote">Chips de Camote</h3>
+                    <p>Deshidratado enchilado con aceite de oliva, sal y chiles secos.</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesan%20los%20Chips%20de%20Camote" class="btn-comprar" target="_blank">Pedir por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="producto-card">
+                <div class="producto-img-placeholder">
+                    <img src="tu-imagen-betabel.jpg" alt="Chips de Betabel">
+                </div>
+                <div class="producto-info">
+                    <h3 class="color-betabel">Chips de Betabel</h3>
+                    <p>Deshidratado enchilado con aceite de oliva, sal y chiles secos.</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesan%20los%20Chips%20de%20Betabel" class="btn-comprar" target="_blank">Pedir por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="producto-card">
+                <div class="producto-img-placeholder">
+                    <img src="tu-imagen-amaranto-rojo.jpg" alt="Churritos de Amaranto Enchilados">
+                </div>
+                <div class="producto-info">
+                    <h3 class="color-amaranto-rojo">Churritos de Amaranto</h3>
+                    <p>Versión enchilada, crujiente y llena de energía.</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesan%20los%20Churritos%20Enchilados" class="btn-comprar" target="_blank">Pedir por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="producto-card">
+                <div class="producto-img-placeholder">
+                    <img src="tu-imagen-amaranto-verde.jpg" alt="Churritos de Amaranto">
+                </div>
+                <div class="producto-info">
+                    <h3 class="color-amaranto-verde">Churritos Naturales</h3>
+                    <p>El snack perfecto y ligero para cualquier hora del día.</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesan%20los%20Churritos%20Naturales" class="btn-comprar" target="_blank">Pedir por WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="producto-card">
+                <div class="producto-img-placeholder">
+                    <img src="tu-imagen-jicama.jpg" alt="Chips de Jícama">
+                </div>
+                <div class="producto-info">
+                    <h3 class="color-jicama">Chips de Jícama</h3>
+                    <p>Deshidratada con aceite de oliva, sal y limón.</p>
+                    <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesan%20los%20Chips%20de%20Jicama" class="btn-comprar" target="_blank">Pedir por WhatsApp</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 La Crunchería. Todos los derechos reservados.</p>
+        <p>Comercializadora mexicana de botanas saludables.</p>
+    </footer>
+
+</body>
+</html>
