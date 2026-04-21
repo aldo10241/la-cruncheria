@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La Crunchería | Botanas Saludables</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         /* --- VARIABLES Y COLORES --- */
         :root {
@@ -27,14 +29,14 @@
         }
 
         html {
-            scroll-behavior: smooth; /* Desplazamiento suave al dar clic en menú */
+            scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-dark);
             line-height: 1.6;
-            overflow-x: hidden; /* Evita scroll horizontal indeseado */
+            overflow-x: hidden;
         }
 
         /* --- CLASES DE ANIMACIÓN --- */
@@ -68,10 +70,14 @@
             text-decoration: none;
         }
 
-        /* Ajuste para que la imagen del logo se vea bien */
         .logo img {
-            height: 50px; /* Ajusta este valor según el tamaño de tu logo */
+            height: 50px;
             width: auto;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
         }
 
         nav a {
@@ -83,21 +89,28 @@
             font-size: 1rem;
         }
 
-        nav a:hover {
+        nav a:hover, .cart-icon:hover {
             color: var(--camote-orange);
         }
 
-        /* --- SECCIÓN HERO (PRINCIPAL) --- */
+        .cart-icon {
+            margin-left: 25px;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        /* --- SECCIÓN HERO --- */
         .hero {
             position: relative;
             text-align: center;
             padding: 120px 5%;
-            /* IMAGEN DE FONDO: Cambia 'assets/tu-fondo-hero.jpg' por tu imagen real */
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/hero-bg.jpg');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Efecto Parallax opcional */
-            color: white; /* Texto blanco para contraste */
+            background-attachment: fixed;
+            color: white;
         }
 
         .hero h1 {
@@ -149,7 +162,6 @@
             display: inline-block;
         }
         
-        /* Pequeña línea decorativa debajo del título */
         .nosotros h2::after {
             content: '';
             display: block;
@@ -166,7 +178,7 @@
             color: #555;
         }
 
-        /* --- SECCIÓN MISIÓN (NUEVA) --- */
+        /* --- SECCIÓN MISIÓN --- */
         .mision-section {
             background-color: var(--section-gray);
             padding: 80px 5%;
@@ -217,11 +229,10 @@
             color: var(--text-dark);
         }
 
-        /* GRID FLEXIBLE CENTRADO */
         .productos-grid {
             display: flex;
-            flex-wrap: wrap; /* Permite que bajen de línea */
-            justify-content: center; /* Centra los elementos (soluciona el 5to elemento) */
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 30px;
             max-width: 1300px;
             margin: 0 auto;
@@ -235,9 +246,7 @@
             transition: transform 0.3s;
             text-align: center;
             border: 2px solid var(--kraft-base);
-            
-            /* Ancho fijo para las tarjetas para que se alineen bien */
-            flex: 0 1 300px; /* Base de 300px, puede encogerse pero no crecer más de lo necesario */
+            flex: 0 1 300px;
             min-width: 280px;
         }
 
@@ -260,7 +269,6 @@
             transition: transform 0.5s;
         }
 
-        /* Efecto zoom suave en la imagen al pasar el mouse */
         .producto-card:hover .producto-img-placeholder img {
             transform: scale(1.05);
         }
@@ -281,10 +289,9 @@
         .producto-info p {
             margin-bottom: 20px;
             font-size: 0.95rem;
-            flex-grow: 1; /* Empuja el botón hacia abajo */
+            flex-grow: 1;
         }
 
-        /* Colores dinámicos */
         .color-camote { color: var(--camote-orange); }
         .color-betabel { color: var(--betabel-maroon); }
         .color-amaranto-rojo { color: var(--amaranto-red); }
@@ -292,38 +299,151 @@
         .color-jicama { color: var(--jicama-blue); }
 
         .btn-comprar {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             padding: 10px 25px;
             background-color: var(--whatsapp-green);
             color: white;
             text-decoration: none;
             border-radius: 25px;
             font-weight: bold;
+            font-size: 1rem;
             transition: background-color 0.3s;
             align-self: center;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-comprar:hover {
             background-color: #1ebe57;
         }
 
-        /* --- FOOTER --- */
+        .btn-agregar {
+            background-color: var(--camote-orange);
+        }
+        .btn-agregar:hover {
+            background-color: #bf7639;
+        }
+
+        /* --- MODAL CARRITO --- */
+        .modal-overlay {
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); 
+            z-index: 2000; 
+            justify-content: center; 
+            align-items: center;
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-content {
+            background: white; 
+            padding: 40px 30px; 
+            border-radius: 15px; 
+            text-align: center; 
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-content i.fa-tools {
+            font-size: 3rem;
+            color: var(--kraft-base);
+            margin-bottom: 15px;
+        }
+
+        .modal-content h3 { 
+            color: var(--text-dark); 
+            margin-bottom: 15px;
+            font-size: 1.5rem; 
+        }
+
+        .modal-content p { 
+            margin-bottom: 25px; 
+            color: #555; 
+            font-size: 1.05rem;
+        }
+
+        .close-btn { 
+            margin-top: 20px; 
+            cursor: pointer; 
+            color: #888; 
+            text-decoration: underline; 
+            background: none; 
+            border: none; 
+            font-size: 0.9rem; 
+        }
+        .close-btn:hover { color: var(--text-dark); }
+
+        /* --- FOOTER Y REDES SOCIALES --- */
         footer {
             background-color: var(--text-dark);
             color: #ccc;
             text-align: center;
-            padding: 40px 5%;
+            padding: 50px 5% 30px;
             margin-top: 0;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-socials a {
+            color: #fff;
+            background-color: rgba(255,255,255,0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-socials a:hover {
+            background-color: var(--camote-orange);
+            transform: translateY(-3px);
+        }
+
+        .footer-contact {
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .footer-contact i {
+            margin-right: 8px;
+            color: var(--camote-orange);
         }
         
         footer p {
             margin: 5px 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
-            nav {
-                display: none; /* Idealmente reemplazar con menú móvil */
+            nav a {
+                display: none; /* Idealmente reemplazar con menú móvil (hamburguesa) */
+            }
+            .cart-icon {
+                margin-left: 0;
             }
             .hero h1 {
                 font-size: 2.5rem;
@@ -346,7 +466,9 @@
         <nav>
             <a href="#inicio">Inicio</a>
             <a href="#nosotros">Historia</a>
-            <a href="#mision">Misión</a> <a href="#productos">Productos</a>
+            <a href="#mision">Misión</a> 
+            <a href="#productos">Productos</a>
+            <i class="fas fa-shopping-cart cart-icon" onclick="mostrarAlertaCarrito()" title="Ver carrito"></i>
         </nav>
     </header>
 
@@ -382,7 +504,7 @@
                 <div class="producto-info">
                     <h3 class="color-camote">Chips de Camote</h3>
                     <p>Deshidratado enchilado con aceite de oliva, sal y chiles secos.</p>
-                    <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesan%20los%20Chips%20de%20Camote" class="btn-comprar" target="_blank">Pedir por WhatsApp</a>
+                    <button onclick="mostrarAlertaCarrito()" class="btn-comprar btn-agregar"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                 </div>
             </div>
 
@@ -393,7 +515,7 @@
                 <div class="producto-info">
                     <h3 class="color-betabel">Chips de Betabel</h3>
                     <p>Deshidratado enchilado con aceite de oliva, sal y chiles secos.</p>
-                    <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesan%20los%20Chips%20de%20Betabel" class="btn-comprar" target="_blank">Pedir por WhatsApp</a>
+                    <button onclick="mostrarAlertaCarrito()" class="btn-comprar btn-agregar"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                 </div>
             </div>
 
@@ -404,7 +526,7 @@
                 <div class="producto-info">
                     <h3 class="color-amaranto-rojo">Churritos de Amaranto</h3>
                     <p>Versión enchilada, crujiente y llena de energía.</p>
-                    <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesan%20los%20Churritos%20Enchilados" class="btn-comprar" target="_blank">Pedir por WhatsApp</a>
+                    <button onclick="mostrarAlertaCarrito()" class="btn-comprar btn-agregar"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                 </div>
             </div>
 
@@ -415,7 +537,7 @@
                 <div class="producto-info">
                     <h3 class="color-amaranto-verde">Churritos Naturales</h3>
                     <p>El snack perfecto y ligero para cualquier hora del día.</p>
-                    <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesan%20los%20Churritos%20Naturales" class="btn-comprar" target="_blank">Pedir por WhatsApp</a>
+                    <button onclick="mostrarAlertaCarrito()" class="btn-comprar btn-agregar"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                 </div>
             </div>
 
@@ -426,20 +548,43 @@
                 <div class="producto-info">
                     <h3 class="color-jicama">Chips de Jícama</h3>
                     <p>Deshidratada con aceite de oliva, sal y limón.</p>
-                    <a href="https://wa.me/5211234567890?text=Hola,%20me%20interesan%20los%20Chips%20de%20Jicama" class="btn-comprar" target="_blank">Pedir por WhatsApp</a>
+                    <button onclick="mostrarAlertaCarrito()" class="btn-comprar btn-agregar"><i class="fas fa-cart-plus"></i> Agregar al carrito</button>
                 </div>
             </div>
 
         </div>
     </section>
 
+    <div class="modal-overlay" id="carritoModal">
+        <div class="modal-content">
+            <i class="fas fa-tools"></i>
+            <h3>¡Carrito en construcción!</h3>
+            <p>Estamos trabajando para que muy pronto puedas realizar tu compra por aquí. Por ahora, ayúdanos levantando tu pedido directamente por WhatsApp.</p>
+            
+            <a href="https://wa.me/525522206345?text=Hola,%20me%20gustaría%20realizar%20un%20pedido%20de%20La%20Crunchería" class="btn-comprar" target="_blank">
+                <i class="fab fa-whatsapp" style="font-size: 1.2rem;"></i> Hacer pedido por WhatsApp
+            </a>
+            <br>
+            <button class="close-btn" onclick="cerrarAlertaCarrito()">Seguir viendo productos</button>
+        </div>
+    </div>
+
     <footer>
+        <div class="footer-socials">
+            <a href="https://www.instagram.com/lacruncheriamx?igsh=MTV1ZXlwcTE3dGd0Zg==" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@la_cruncheria" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+        
+        <div class="footer-contact">
+            <p><i class="fas fa-envelope"></i> lacruncheria2026@gmail.com</p>
+        </div>
+
         <p>&copy; 2026 La Crunchería. Todos los derechos reservados.</p>
         <p>Comercializadora mexicana de botanas saludables.</p>
     </footer>
 
     <script>
-        // Esta función detecta cuando un elemento entra en la pantalla
+        // --- Animación de Scroll ---
         window.addEventListener('scroll', reveal);
 
         function reveal(){
@@ -453,15 +598,27 @@
                 if(revealtop < windowheight - revealpoint){
                     reveals[i].classList.add('active');
                 }
-                // Opcional: Si quieres que desaparezcan al subir, descomenta el else
-                // else {
-                //    reveals[i].classList.remove('active');
-                // }
             }
         }
         
-        // Ejecutar una vez al cargar para mostrar el hero
         reveal();
+
+        // --- Funciones del Modal de Carrito ---
+        function mostrarAlertaCarrito() {
+            document.getElementById('carritoModal').style.display = 'flex';
+        }
+
+        function cerrarAlertaCarrito() {
+            document.getElementById('carritoModal').style.display = 'none';
+        }
+
+        // Cerrar el modal si se hace clic fuera del recuadro blanco
+        window.onclick = function(event) {
+            var modal = document.getElementById('carritoModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 
 </body>
